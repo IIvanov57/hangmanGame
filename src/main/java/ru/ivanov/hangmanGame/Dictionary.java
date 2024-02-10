@@ -1,7 +1,6 @@
 package ru.ivanov.hangmanGame;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ public class Dictionary {
       String wordLine = reader.readLine();
 
       while (wordLine != null) {
-        System.out.println(wordLine);
+       // System.out.println(wordLine);
         //проверяем что слово не коротное и добавляем в список
         if (wordLine.length() > 5) {
           worlds.add(wordLine);
@@ -29,5 +28,12 @@ public class Dictionary {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  //метод для получения рандомного слова
+  public static String randomWord(){
+    int index = (int)(Math.random()*worlds.size());
+
+    return worlds.get(index);
   }
 }
