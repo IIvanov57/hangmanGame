@@ -17,7 +17,7 @@ public class Dictionary {
       while (wordLine != null) {
        // System.out.println(wordLine);
         //проверяем что слово не коротное и добавляем в список
-        if (wordLine.length() > 5) {
+        if (wordLine.length() > 5 && wordLine.length() < 8) {
           worlds.add(wordLine);
         }
         //читаем следующий слово
