@@ -14,7 +14,6 @@ public class Helper {
     public static String printArray(ArrayList<Character> characters) {
         String arrayChar = "";
         for (Character i : characters) {
-            //System.out.print(i);
             arrayChar = arrayChar + "" + i;
         }
         return arrayChar;
@@ -34,7 +33,7 @@ public class Helper {
     public static Boolean checkResolution(ArrayList<Character> characters) {
         int count = 0;
         for (Character i : characters) {
-            if (i.charValue() == 95) {
+            if (i == 95) {
                 count++;
             }
         }
