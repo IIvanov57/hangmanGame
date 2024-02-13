@@ -10,7 +10,7 @@ public class Main {
 
     //начало игры
     while (true) {
-      System.out.println("Напишите \"да\" если хотите начать новую игру или \"нет\" чтобы выйти из игры");
+      System.out.println("Напишите \"да\", если хотите начать новую игру или \"нет\", чтобы выйти из игры");
       Scanner inputDecide = new Scanner(System.in);
       String result = inputDecide.nextLine();
       if (result.equalsIgnoreCase("нет")) {
@@ -23,43 +23,45 @@ public class Main {
       int countMistake = 0;
       //массив для загаданного слова
       char[] word;
-      //список из букв, котрые отгадал игрок
+      //список из букв, которые отгадал игрок
       ArrayList<Character> wordForGamer = new ArrayList<>();
-      //спписок куда будем складывать буквы, которых нет в загаданном слове
+      //список куда будем складывать буквы, которых нет в загаданном слове
       ArrayList<Character> mistakeChar = new ArrayList<>();
-      //рандомно выбираем солово из словоря
+      //рандомно выбираем солово из словаря
       String randomWord = Dictionary.randomWord();
       word = randomWord.toCharArray();
       Helper.fillingArray(word, wordForGamer);
       //для теста
       //System.out.println(randomWord);
-      System.out.println("Слово загаданно! ");
+      System.out.println("Слово загадано! ");
       while (true) {
         if (Helper.checkResolution(wordForGamer)) {
-          System.out.println("Победа! Слово: " + Helper.printArray(wordForGamer));
+          System.out.println("Победа! Слово: " + Helper.getWord(wordForGamer));
           break;
         }
         if (countMistake != 7) {
-          System.out.println("Слово: " + Helper.printArray(wordForGamer));
-          System.out.println("Ошибки " + "(" + countMistake + ")" + ": " + Helper.printArray(mistakeChar));
+          System.out.println("Слово: " + Helper.getWord(wordForGamer));
+          System.out.println("Ошибки " + "(" + countMistake + ")" + ": " + Helper.getWord(mistakeChar));
           System.out.println("Введите букву: ");
 
           Scanner scannerInputChar = new Scanner(System.in);
           String charInput = scannerInputChar.nextLine();
 
           //блок валидации вводимого символа
+          // (проверяем символ не число, не больше одного символа, символ является кириллицей)
           if (charInput.length() > 1) {
             System.out.println("Введите одну букву!");
             continue;
-          } else if (!Character.isLetter(charInput.charAt(0))) {
-            System.out.println("Введите букву!");
+          } else if (!Character.isLetter(charInput.charAt(0)) ||
+                  !(Character.UnicodeBlock.of(charInput.charAt(0)) == Character.UnicodeBlock.CYRILLIC)) {
+            System.out.println("Введите русскую букву!");
             continue;
           }
           //берем символ
           char charUser = charInput.toLowerCase().charAt(0);
 
           //считаем кол-во ошибок и добавляем не верные попытки в список mistakeChar
-          if (Helper.findCharAndCounterMistake(word, wordForGamer, charUser) == 0
+          if (Helper.findChar(word, wordForGamer, charUser) == 0
                   && !Helper.checkCharInMistakes(mistakeChar, charUser)) {
 
             mistakeChar.add(charUser);

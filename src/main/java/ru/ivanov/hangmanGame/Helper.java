@@ -3,23 +3,24 @@ package ru.ivanov.hangmanGame;
 import java.util.ArrayList;
 
 public class Helper {
+    //символ нижнего подчеркивания
+    private static final char UNDERSCORE_CHAR = 95;
 
     public static void fillingArray(char[] word, ArrayList<Character> characters) {
         for (int i = 0; i < word.length; i++) {
-            char j = 95;
-            characters.add(j);
+            characters.add(UNDERSCORE_CHAR);
         }
     }
 
-    public static String printArray(ArrayList<Character> characters) {
-        String arrayChar = "";
+    public static String getWord(ArrayList<Character> characters) {
+        StringBuilder arrayChar = new StringBuilder();
         for (Character i : characters) {
-            arrayChar = arrayChar + "" + i;
+            arrayChar.append(i);
         }
-        return arrayChar;
+        return arrayChar.toString();
     }
 
-    public static int findCharAndCounterMistake(char[] word, ArrayList<Character> characters, char charUser) {
+    public static int findChar(char[] word, ArrayList<Character> characters, char charUser) {
         int count = 0;
         for (int i = 0; i < word.length; i++) {
             if (charUser == word[i]) {
@@ -33,7 +34,7 @@ public class Helper {
     public static Boolean checkResolution(ArrayList<Character> characters) {
         int count = 0;
         for (Character i : characters) {
-            if (i == 95) {
+            if (i == UNDERSCORE_CHAR) {
                 count++;
             }
         }

@@ -7,19 +7,20 @@ import java.util.ArrayList;
 
 
 public class Dictionary {
-  public static ArrayList<String> worlds = new ArrayList<>();
+  public static ArrayList<String> words = new ArrayList<>();
 
   public static void addWords() {
     //File file = new File("src\\main\\java\\resources");
     try (BufferedReader reader = new BufferedReader(new FileReader("src\\main\\java\\resources\\russian_nouns.txt"))) {
       String wordLine = reader.readLine();
 
-      while (wordLine != null) {
-       // System.out.println(wordLine);
-        //проверяем что слово не коротное и добавляем в список
+      while (wordLine != null || words.size() == 100) {
+        // System.out.println(wordLine);
+        //проверяем что слово не короткое и добавляем в список
         if (wordLine.length() > 5 && wordLine.length() < 8) {
-          worlds.add(wordLine);
+          words.add(wordLine);
         }
+
         //читаем следующий слово
         wordLine = reader.readLine();
       }
@@ -31,9 +32,9 @@ public class Dictionary {
   }
 
   //метод для получения рандомного слова
-  public static String randomWord(){
-    int index = (int)(Math.random()*worlds.size());
+  public static String randomWord() {
+    int index = (int) (Math.random() * words.size());
 
-    return worlds.get(index);
+    return words.get(index);
   }
 }
